@@ -1,5 +1,8 @@
-# C Project: Quadcopter ENSTAAAAA
-#Que dit la prof ?
+# C Quadcopter ENSTAAAAAAAAAAA mateo et thibault
+
+
+
+
 ##  $1^{st}$ steps helper functions
 In the file helpers.c you will first write three fucntions that you will need for the rest of the project:
 - ```mat_mult(const float *A, int A_rows, int A_cols, const float *B, int B_cols, float *C)``` where A and B are the matrices to multiply and C is the multiplication resulting matrix.

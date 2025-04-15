@@ -1,4 +1,4 @@
-# C Quadcopter ENSTAAAAAAAAAAA mateo et thibault et noé
+# C Quadcopter ENSTAAAAAAAAAAA mateo et Thiba et noé
 
 
 

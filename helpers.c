@@ -35,3 +35,14 @@ vec_substract(const float *a, const float *b, float *c, int dim){
         c[i]=a[i]-b[i]; // Pas besoin de commentaire
     }
 }
+
+void copy_mat(const float **A,float **B,int rows, int cols){
+
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){        // Recopie une matrice non modifiable en matrice modifiable
+            B[i][j]=A[i][j];
+        }
+    }
+
+
+}

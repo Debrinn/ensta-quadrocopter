@@ -17,3 +17,21 @@ void mat_mult(const float **A, int A_rows, int A_cols, const float **B, int B_co
         }
     }
 }
+
+void mat_transpose(const float **A, int rows, int cols, float **A_T)
+{
+    for(int i=0;i<rows;i++){
+        for (int j=0;j<cols;j++){       // On inverse juste les coefficients , sans se soucier de la validité de la taille (on la suppose ok)
+            A_T[j][i]=A[i][j];
+        }
+    }
+
+}
+
+
+vec_substract(const float *a, const float *b, float *c, int dim){
+
+    for(int i=0; i<dim;i++){
+        c[i]=a[i]-b[i]; // Pas besoin de commentaire
+    }
+}

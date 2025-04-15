@@ -9,7 +9,7 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
 {
     //generation de la matrice PK avec malloc
     float ** pk = make_mat(STATE_DIM,STATE_DIM);
-    copy_mat(Q,pk);
+    copy_mat(Q,pk,STATE_DIM,STATE_DIM);
     for (int k = 0; k < MAX_ITER; k++){
         float ** pk_plus_1 = make_mat(STATE_DIM,STATE_DIM);
         float ** at_pk_a = make_mat(STATE_DIM,STATE_DIM);
@@ -49,7 +49,7 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
 
         mat_algebrique(at_pk_a,at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a,le_moins,STATE_DIM,STATE_DIM, 1);
 
-        mat_algebrique(Q,le_moins,pk_plus_1,1);
+        mat_algebrique(Q,le_moins,pk_plus_1,STATE_DIM,STATE_DIM,1);
 
 
         /*ON va libérer toutes les matrices*/
@@ -74,8 +74,8 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
 
 
         float ** difference = make_mat(STATE_DIM,STATE_DIM);
-        mat_algebrique(pk_plus_1,pk,STATE_DIM,STATE_DIM,-1);
-        free_mat(pk);
+        mat_algebrique(pk_plus_1,pk,difference, STATE_DIM,STATE_DIM,-1);
+        free_mat(pk, STATE_DIM);
         pk = pk_plus_1;
         if ((norme_mat(difference)) < TOL){
             break;
@@ -138,7 +138,7 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
     free_mat(inv_r_plus_bt_pk_b_bt_pk_a, CTRL_DIM);
     free_mat(at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a, STATE_DIM);
 
-    free(pk);
+    free_mat(pk,STATE_DIM);
 
 
 }

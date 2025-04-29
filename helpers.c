@@ -75,3 +75,64 @@ float norm(float **A,int rows,int cols){
     return S;
 
 }
+
+
+//fonction déterminant
+
+float determinant3x3(float A[3][3]) {
+    return A[0][0]*(A[1][1]* A[2][2]-A[1][2]*A[2][1]) -
+           A[0][1]*(A[1][0] *A[2][2]-A[1][2]*A[2][0])+
+           A[0][2]*(A[1][0] * A[2][1] -A[1][1]*A[2][0]);
+}
+
+
+//fonction inverse
+
+
+int invert_3x3(float A[3][3], float a_inv[3][3]){
+    if (determinant3x3(A) == 0){
+        return 0;
+    }
+    else{
+
+        float COM[3][3]; //création de la comatrice
+        COM[0][0] = A[1][1] * A[2][2] - A[1][2] * A[2][1];
+        COM[0][1] = -1*(A[1][0] * A[2][2] - A[1][2] * A[2][0]);
+        COM[0][2] = A[1][0] * A[2][1] - A[1][1] * A[2][0];
+        COM[1][0] = -1*(A[0][1] * A[2][2] - A[0][2] * A[2][1]);
+        COM[1][1] = A[0][0] * A[2][2] - A[0][2] * A[2][0];
+        COM[1][2] = -1*(A[0][0] * A[2][1] - A[0][1] * A[2][0]);
+        COM[2][0] = A[0][1] * A[1][2] - A[0][2] * A[1][1];
+        COM[2][1] = -1*(A[0][0] * A[1][2] - A[0][2] * A[1][0]);
+        COM[2][2] = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+
+        float detA = determinant3x3(A); //det A
+
+        // inverse comatrice
+        //on a Tcom(A)/det(A)=A^-1 pour det(A)!=0
+
+        float **TCOM    
+        mat_transpose(A,3,3,TCOM);
+
+        for ( int i = 0 ; i<3 ; i++ ){
+            for( int j = 0 ; j<3 ; j++ ){
+
+                a_inv[i][j] = TCOM[i][j] / detA;
+
+            }
+        }
+    }
+    return 1;
+}
+
+//print une matrice 3x3
+
+void print_matrix( float A[3][3]){
+    for (int i = 0 ; i<3 ; i++){
+        for (int j = 0 ; j<3 ; j++){
+
+            printf("%1.f ", A[i][j]);
+        }
+    printf ("\n");
+    }
+}

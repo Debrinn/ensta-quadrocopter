@@ -111,6 +111,12 @@ int invert_3x3(float A[3][3], float a_inv[3][3]){
         // inverse comatrice
         //on a Tcom(A)/det(A)=A^-1 pour det(A)!=0
 
+<<<<<<< HEAD
+=======
+        float **TCOM    ;
+        mat_transpose(A,3,3,TCOM);
+
+>>>>>>> a30dad45585efe5bc1dd77eabd7e4f29454595d7
         for ( int i = 0 ; i<3 ; i++ ){
             for( int j = 0 ; j<3 ; j++ ){
 

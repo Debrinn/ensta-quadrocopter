@@ -1,5 +1,6 @@
 #include "helpers.h"
 #include "params.h"
+#include "lqr_solver.h"
 
 void compute_lqr_gains( float A[STATE_DIM][STATE_DIM], 
                      float B[STATE_DIM][CTRL_DIM],

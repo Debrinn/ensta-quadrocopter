@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/lqr_solver.dir/helpers.c.o CMakeFiles/lqr_solver.dir/lqr_solver.c.o -o lqr_solver 

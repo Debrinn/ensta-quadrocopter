@@ -1,0 +1,3 @@
+/home/mateo/Documents/ENSTA/info/in104/quadrocopter/CMakeFiles/lqr_solver.dir
+/home/mateo/Documents/ENSTA/info/in104/quadrocopter/CMakeFiles/edit_cache.dir
+/home/mateo/Documents/ENSTA/info/in104/quadrocopter/CMakeFiles/rebuild_cache.dir

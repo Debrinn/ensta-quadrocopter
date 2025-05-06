@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "helpers.h"
 
-// Fonction qui multiplie les matrices
+// Fonction qui multiplie deux matrices
 void mat_mult( float **A, int A_rows, int A_cols,  float **B, int B_cols, float **C) {
     for (int i = 0; i < A_rows; i++) {
         for (int j = 0; j < B_cols; j++) {
@@ -15,7 +15,7 @@ void mat_mult( float **A, int A_rows, int A_cols,  float **B, int B_cols, float 
     }
 }
 
-// Transposée d'une matrice
+// Transposée d'une matrice dans la matrice A_T (QUI EST DEJA DE BONNE TAILLE)
 void mat_transpose( float **A, int rows, int cols, float **A_T) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {

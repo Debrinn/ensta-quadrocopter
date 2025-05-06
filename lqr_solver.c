@@ -2,6 +2,7 @@
 #include "params.h"
 #include "lqr_solver.h"
 
+//Cette fonction applique l'algorithme défini dans l'énoncé, qui permet de calculer le gain K
 void compute_lqr_gains( float A[STATE_DIM][STATE_DIM], 
                      float B[STATE_DIM][CTRL_DIM],
                      float Q[STATE_DIM][STATE_DIM],
@@ -12,6 +13,9 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
     float ** pk = make_mat(STATE_DIM,STATE_DIM);
     copy_mat(Q,pk,STATE_DIM,STATE_DIM);
     for (int k = 0; k < MAX_ITER; k++){
+        // *** IMPORTANT ***
+        // Comme on code en C, et que les fonctions de base entrent dans une matrice les valeurs des transposées, produits, sommes,
+        // il nous faut pour chaque transposée, somme, produit... créer une nouvelle matrice vierge pour y insérer les éléments
         float ** pk_plus_1 = make_mat(STATE_DIM,STATE_DIM);
         float ** at_pk_a = make_mat(STATE_DIM,STATE_DIM);
         float ** a_tra = make_mat(STATE_DIM,STATE_DIM);
@@ -86,9 +90,9 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
 
 
     }
+    //nous avons trouvé à ce stade un Pk+1 (enregistré pk) tel que la différence Pk+1 - pk est inférieure à l'erreur que l'on s'autorise
 
-    float ** k = make_mat(STATE_DIM,STATE_DIM);
-
+    //De nouveau beaucoup de calculs
     float ** at_pk_a = make_mat(STATE_DIM,STATE_DIM);
     float ** a_tra = make_mat(STATE_DIM,STATE_DIM);
     float ** pk_a = make_mat(STATE_DIM,STATE_DIM);
@@ -124,7 +128,11 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
     mat_mult(at_pk_b,STATE_DIM,CTRL_DIM,inv_r_plus_bt_pk_b_bt_pk_a,STATE_DIM,at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a);
 
 
+    //on enregistre ici le K dans la matrice donnée par la fonction
     mat_algebrique(at_pk_a,at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a, K ,STATE_DIM,STATE_DIM, 1);
+
+
+    // on libère de nouveau les fonctions dont on a besoin
 
     free_mat(at_pk_a, STATE_DIM);
     free_mat(a_tra, STATE_DIM);
@@ -139,6 +147,7 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
     free_mat(inv_r_plus_bt_pk_b_bt_pk_a, CTRL_DIM);
     free_mat(at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a, STATE_DIM);
 
+    //on a plus besoin de pk non plus
     free_mat(pk,STATE_DIM);
 
 

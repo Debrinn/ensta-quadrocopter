@@ -65,7 +65,7 @@ void free_mat(float **A, int rows) {
     free(A); // Puis libère le tableau de pointeurs
 }
 
-float norm(float **A,int rows,int cols){
+float norme_mat(float **A,int rows,int cols){
     float S=0;
     for(int i=0;i<rows;i++){
         for(int j=0;j<cols;j++){        
@@ -79,7 +79,7 @@ float norm(float **A,int rows,int cols){
 
 //fonction déterminant
 
-float determinant3x3(float A[3][3]) {
+float determinant3x3(float **A) {
     return A[0][0]*(A[1][1]* A[2][2]-A[1][2]*A[2][1]) -
            A[0][1]*(A[1][0] *A[2][2]-A[1][2]*A[2][0])+
            A[0][2]*(A[1][0] * A[2][1] -A[1][1]*A[2][0]);
@@ -89,13 +89,18 @@ float determinant3x3(float A[3][3]) {
 //fonction inverse
 
 
-int invert_3x3(float A[3][3], float a_inv[3][3]){
+int invert_3x3(float **A, float **a_inv){
     if (determinant3x3(A) == 0){
         return 0;
     }
     else{
-
-        float COM[3][3]; //création de la comatrice
+        //création de la comatrice
+        float **COM = malloc(sizeof(float*)*3); 
+        for (int i = 0; i <3; i++){
+            float *l= malloc(sizeof(float)*3);
+            COM[i] = l;
+        }
+        //Remplissage de la commatrice
         COM[0][0] = A[1][1] * A[2][2] - A[1][2] * A[2][1];
         COM[0][1] = -1*(A[1][0] * A[2][2] - A[1][2] * A[2][0]);
         COM[0][2] = A[1][0] * A[2][1] - A[1][1] * A[2][0];
@@ -124,7 +129,7 @@ int invert_3x3(float A[3][3], float a_inv[3][3]){
 
 //print une matrice 3x3
 
-void print_matrix( float A[3][3]){
+void print_matrix( float **A){
     for (int i = 0 ; i<3 ; i++){
         for (int j = 0 ; j<3 ; j++){
 

@@ -3,12 +3,19 @@
 #include "lqr_solver.h"
 
 //Cette fonction applique l'algorithme défini dans l'énoncé, qui permet de calculer le gain K
-void compute_lqr_gains( float A[STATE_DIM][STATE_DIM], 
-                     float B[STATE_DIM][CTRL_DIM],
-                     float Q[STATE_DIM][STATE_DIM],
-                     float R [CTRL_DIM][CTRL_DIM],
-                    float K[CTRL_DIM][CTRL_DIM])
+void compute_lqr_gains( float **A, 
+                     float **B,
+                     float **Q,
+                     float **R,
+                    float **K)
 {
+
+    //Les tailles des matrices :
+    // A : STATE_DIM x STATE_DIM
+    // B : STATE_DIM x CTRL_DIM
+    // Q : STATE_DIM x STATE_DIM
+    // R : CTRL_DIM x CTRL_DIM
+    // K : CTRL_DIM x CTRL_DIM
     //generation de la matrice PK avec malloc
     float ** pk = make_mat(STATE_DIM,STATE_DIM);
     copy_mat(Q,pk,STATE_DIM,STATE_DIM);
@@ -82,7 +89,7 @@ void compute_lqr_gains( float A[STATE_DIM][STATE_DIM],
         mat_algebrique(pk_plus_1,pk,difference, STATE_DIM,STATE_DIM,-1);
         free_mat(pk, STATE_DIM);
         pk = pk_plus_1;
-        if ((norme_mat(difference)) < TOL){
+        if ((norme_mat(difference,STATE_DIM,STATE_DIM)) < TOL){
             break;
         }
 

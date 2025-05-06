@@ -24,4 +24,9 @@ Now that you have implemented you helper functions, you will have to define your
 You can implement your function in lqr_solver.c
 
 ## Comment lancer le code 
-To build and run your project you can use ```cmake .``` then ```make``` to build your code. Then you can you your solver with ```./lqr_solver```
+Pour lancer le projet, il faut :
+```cmake .```
+et ensuite
+```make```
+Enfin, le solveur se lancera grâce au code :
+```./lqr_solver```

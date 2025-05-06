@@ -20,6 +20,9 @@ MULTIPLICATION DE DEUX MATRICES
 void mat_transpose( float **A, int rows, int cols, float **A_T);
 TRANSPOSEE D'UNE MATRICE A rows LIGNE ET cols COLONNES.
 
+float determinant3x3(float **A);
+DETERMINANT D'UNE MATRICE 3X3.
+
 int invert_3x3( float **A, float **a_inv); 
 INVERSION D'UNE MATRICE 3X3.
 

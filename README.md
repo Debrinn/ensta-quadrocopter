@@ -1,9 +1,9 @@
-# C Quadcopter ENSTAAAAAAAAAAA Mateo et Thibault
+# Projet de Quadrocopter, par Thibault et Matéo
 
 
 
 
-##  $1^{st}$ steps helper functions
+##  Premières fonctions
 In the file helpers.c you will first write three fucntions that you will need for the rest of the project:
 - ```mat_mult(const float *A, int A_rows, int A_cols, const float *B, int B_cols, float *C)``` where A and B are the matrices to multiply and C is the multiplication resulting matrix.
 - ```mat_transpose(const float *A, int rows, int cols, float *A_T)``` transposing matrix A.
@@ -23,5 +23,5 @@ I = \begin{bmatrix}0.02166666666666667 & 0.0 & 0.0 \\
 Now that you have implemented you helper functions, you will have to define your system and implement the algorithm provided in the project's description sheet in section 3.2.
 You can implement your function in lqr_solver.c
 
-## Running the solver
+## Comment lancer le code 
 To build and run your project you can use ```cmake .``` then ```make``` to build your code. Then you can you your solver with ```./lqr_solver```

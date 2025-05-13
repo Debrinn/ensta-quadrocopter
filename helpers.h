@@ -13,3 +13,5 @@ void copy_mat( float **A, float **B, int rows, int cols);
 float **make_mat(int rows, int cols);
 void free_mat(float **A, int rows);
 float norme_mat(float **A,int rows,int cols);
+
+void mult_mat_vec(float * res, float ** M, float * v, int n, int m);

@@ -138,3 +138,18 @@ void print_matrix( float **A){
     printf ("\n");
     }
 }
+
+
+//Fonction de multiplication d'une matrice par un vecteur
+
+void mult_mat_vec(float * res, float ** M, float * v, int n, int m){
+    //le res est de taille n, v de taille m
+    for(int i = 0; i < n; i++){
+        float somme = 0. ;
+        for(int j = 0; j < m; j ++){
+            somme = somme + M[i][j] * v[i];
+
+        }
+        res[i] = somme;
+    }
+}

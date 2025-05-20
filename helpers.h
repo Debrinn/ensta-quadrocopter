@@ -15,3 +15,9 @@ void free_mat(float **A, int rows);
 float norme_mat(float **A,int rows,int cols);
 
 void mult_mat_vec(float * res, float ** M, float * v, int n, int m);
+
+void vect_to_quat(float ** quat, float ** vect, int ligne);
+
+void quat_mult(float ** quat1, float ** quat2, float ** res);
+
+void inv_quat(float ** q, float ** q_inv);

@@ -153,3 +153,30 @@ void mult_mat_vec(float * res, float ** M, float * v, int n, int m){
         res[i] = somme;
     }
 }
+
+
+void vect_to_quat(float ** quat, float ** vect, int ligne){
+    quat[0][0] = 0;
+    for (int i = 0; i < 3; i ++){
+        if (ligne == 1){
+            quat[i+1][0] = vect[0][i];
+        }else{
+            quat[i+1][0] = vect[i][0];
+
+        }
+    }
+}
+
+void quat_mult(float ** quat1, float ** quat2, float ** res){
+    res[0][0] = quat1[0][0]* quat2[0][0] - quat1[1][0]*quat2[1][0] - quat1[2][0]*quat2[2][0] - quat1[3][0]*quat2[3][0];
+    res[1][0] = quat1[0][0]*quat2[1][0] + quat1[1][0]*quat2[0][0] + quat1[2][0]*quat2[3][0] - quat1[3][0]* quat2[2][0];
+    res[2][0] = quat1[0][0]*quat2[2][0] - quat1[1][0]*quat2[3][0] + quat1[2][0]*quat2[0][0] + quat1[3][0]* quat2[1][0];
+    res[3][0] = quat1[0][0]*quat2[3][0] + quat1[1][0]*quat2[2][0] - quat1[2][0]*quat2[1][0] + quat1[3][0]* quat2[0][0];
+}
+
+void inv_quat(float ** q, float ** q_inv){
+    q_inv[0][0] = q[0][0];
+    q_inv[1][0] = -1 * q[1][0];
+    q_inv[2][0] = -1 * q[2][0];
+    q_inv[3][0] = -1 * q[3][0];
+}

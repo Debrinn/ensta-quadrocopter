@@ -17,7 +17,7 @@ Elles se trouvent dans le fichier helpers.c (code) et helpers.h (prototypes).
 void mat_mult( float **A, int A_rows, int A_cols,  float **B, int B_cols, float **C);
 MULTIPLICATION DE DEUX MATRICES
 
-void mat_transpose( float **A, int rows, int cols, float **A_T);
+void mat_transpose( float **A, int rows, int cols, float **A )
 TRANSPOSEE D'UNE MATRICE A rows LIGNE ET cols COLONNES.
 
 float determinant3x3(float **A);

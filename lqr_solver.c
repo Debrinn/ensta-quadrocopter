@@ -90,6 +90,7 @@ void compute_lqr_gains( float **A,
         free_mat(pk, STATE_DIM);
         pk = pk_plus_1;
         if ((norme_mat(difference,STATE_DIM,STATE_DIM)) < TOL){
+            printf("LE k correspondant : %d\n",k);
             break;
         }
 
@@ -98,7 +99,7 @@ void compute_lqr_gains( float **A,
 
     }
     //nous avons trouvé à ce stade un Pk+1 (enregistré pk) tel que la différence Pk+1 - pk est inférieure à l'erreur que l'on s'autorise
-
+    print_matrix(pk,STATE_DIM,STATE_DIM);
     //De nouveau beaucoup de calculs
     float ** at_pk_a = make_mat(STATE_DIM,STATE_DIM);
     float ** a_tra = make_mat(STATE_DIM,STATE_DIM);
@@ -123,7 +124,7 @@ void compute_lqr_gains( float **A,
 
     float ** bt_pk_a = make_mat(CTRL_DIM,STATE_DIM);
     mat_mult(b_tra,CTRL_DIM,STATE_DIM,pk_a,STATE_DIM,bt_pk_a);
-
+    //print_matrix(pk_a,STATE_DIM,STATE_DIM);
     float ** at_pk_b = make_mat(STATE_DIM,CTRL_DIM);
     mat_mult(a_tra,STATE_DIM,STATE_DIM,pk_b,CTRL_DIM,at_pk_b);
 
@@ -131,12 +132,15 @@ void compute_lqr_gains( float **A,
     float ** inv_r_plus_bt_pk_b_bt_pk_a = make_mat(CTRL_DIM,STATE_DIM);
     mat_mult(inv_r_plus_bt_pk_b,CTRL_DIM,CTRL_DIM,bt_pk_a,STATE_DIM,inv_r_plus_bt_pk_b_bt_pk_a);
 
+    //print_matrix(inv_r_plus_bt_pk_b,CTRL_DIM,CTRL_DIM);
+    
+    mat_mult(inv_r_plus_bt_pk_b,CTRL_DIM,CTRL_DIM,bt_pk_a,STATE_DIM,K);
     float ** at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a =make_mat(STATE_DIM,STATE_DIM);
     mat_mult(at_pk_b,STATE_DIM,CTRL_DIM,inv_r_plus_bt_pk_b_bt_pk_a,STATE_DIM,at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a);
 
 
     //on enregistre ici le K dans la matrice donnée par la fonction
-    mat_algebrique(at_pk_a,at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a, K ,STATE_DIM,STATE_DIM, 1);
+    //mat_algebrique(at_pk_a,at_pk_b_inv_r_plus_bt_pk_b_bt_pk_a, K ,STATE_DIM,STATE_DIM, 1);
 
 
     // on libère de nouveau les fonctions dont on a besoin
@@ -162,5 +166,40 @@ void compute_lqr_gains( float **A,
 
 
 int main(int argc, char ** argv){
+        float ** A = make_mat(6,6);
+    float ** B = make_mat(6,3);
+    float ** Q = make_mat(6,6);
+    float ** R = make_mat(3,3);
+
+    A[0][3] = 1.;
+    A[1][4] = 1. ;
+    A[2][5] = 1.;
+
+    float Ixx = 0.02166666666666667;
+    float Iyy = 0.02166666666666667;
+    float Izz = 0.04000000000000001;
+
+    B[3][0] = 1/Ixx;
+    B[4][1] = 1/Iyy;
+    B[5][2] = 1/Izz;
+
+    Q[0][0] = 0.135;
+    Q[1][1] = 0.135;
+    Q[2][2] = 0.135;
+
+    Q[3][3] = 0.0005;
+    Q[4][5] = 0.0005;
+    Q[5][5] = 0.0005;
+
+    R[0][0] = 1. ;
+    R[1][1] = 1. ;
+    R[2][2] = 1. ;
+
+    float ** K = make_mat(3,6);
+    compute_lqr_gains(A,B,Q,R,K);
+   // print_matrix(K,3,6);
+
+
+    
     return 0;
 }

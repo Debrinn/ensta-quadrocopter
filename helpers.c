@@ -129,7 +129,7 @@ int invert_3x3(float **A, float **a_inv){
 
 //print une matrice 3x3
 
-void print_matrix( float **A){
+void print_matri( float **A){
     for (int i = 0 ; i<3 ; i++){
         for (int j = 0 ; j<3 ; j++){
 
@@ -179,4 +179,18 @@ void inv_quat(float ** q, float ** q_inv){
     q_inv[1][0] = -1 * q[1][0];
     q_inv[2][0] = -1 * q[2][0];
     q_inv[3][0] = -1 * q[3][0];
+}
+
+
+
+
+
+
+void print_matrix(float** A, int rows, int columns) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            printf("%8.3f ", A[i][j]);
+        }
+        printf("\n");
+    }
 }

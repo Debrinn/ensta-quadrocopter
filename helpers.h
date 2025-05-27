@@ -21,3 +21,5 @@ void vect_to_quat(float ** quat, float ** vect, int ligne);
 void quat_mult(float ** quat1, float ** quat2, float ** res);
 
 void inv_quat(float ** q, float ** q_inv);
+
+void print_matrix(float** A, int rows, int columns);

@@ -58,6 +58,8 @@ float **make_mat(int rows, int cols) {
     return A;
 }
 
+//Libère la matrice
+
 void free_mat(float **A, int rows) {
     for (int i = 0; i < rows; i++) {
         free(A[i]); // Libère chaque ligne
@@ -65,6 +67,7 @@ void free_mat(float **A, int rows) {
     free(A); // Puis libère le tableau de pointeurs
 }
 
+//Calcul la norme d'une matrice
 float norme_mat(float **A,int rows,int cols){
     float S=0;
     for(int i=0;i<rows;i++){
@@ -127,17 +130,6 @@ int invert_3x3(float **A, float **a_inv){
     return 1;
 }
 
-//print une matrice 3x3
-
-void print_matri( float **A){
-    for (int i = 0 ; i<3 ; i++){
-        for (int j = 0 ; j<3 ; j++){
-
-            printf("%1.f ", A[i][j]);
-        }
-    printf ("\n");
-    }
-}
 
 
 //Fonction de multiplication d'une matrice par un vecteur
@@ -154,6 +146,17 @@ void mult_mat_vec(float * res, float ** M, float * v, int n, int m){
     }
 }
 
+//Affichage matrice 
+void print_matrix(float** A, int rows, int columns) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            printf("%8.3f ", A[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+// -----FONCTIONS liées aux quaternions ------
 
 void vect_to_quat(float ** quat, float ** vect, int ligne){
     quat[0][0] = 0;
@@ -185,15 +188,7 @@ void inv_quat(float ** q, float ** q_inv){
 
 
 
-
-void print_matrix(float** A, int rows, int columns) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            printf("%8.3f ", A[i][j]);
-        }
-        printf("\n");
-    }
-}
+// ----- FONCTIONS UTILES POUR calculer q_ref -----
 
 
 void pdt_vect(float **A, float **B, float **C){

@@ -6,7 +6,7 @@
 
 
 
-
+//Fonction qui va calculer q_ref
 
 void q_ref_calcul(float ** a_ref, float psi_ref, float ** q_ref){
 
@@ -54,6 +54,10 @@ void q_ref_calcul(float ** a_ref, float psi_ref, float ** q_ref){
     //Etape 5 : Convertir R en  quaterion q_ref
 
     rotation_matrice_vers_quat_chiaverini(R,q_ref);
+    
+    free_mat(x_B,3);
+    free_mat(y_B,3);
+    free_mat(z_B,3);
 
 
 

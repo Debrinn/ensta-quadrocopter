@@ -3,7 +3,7 @@
 
 //void transpose_q(q, q_et)
 
-
+//Cette fonction applique la formule qui permet de calculer T_ref
 void trouver_T_ref(float * a_ref, float * g, float * q, float m, float** T_ref){
     float ** a_quad = make_mat(4,1);
     vect_to_quat(a_quad,a_ref,0);

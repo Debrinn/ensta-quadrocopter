@@ -20,16 +20,35 @@ You can test your functions with basic algebra computations before starting the 
 
 ## Fonctions déjà implémentées dans `helpers.c` / `helpers.h`
 
-* `mat_mult(float **A, int A_rows, int A_cols, float **B, int B_cols, float **C)` — multiplies matrices A and B, stores the result in C.
-* `mat_transpose(float **A, int rows, int cols, float **A_T)` — transposes matrix A.
-* `determinant3x3(float **A)` — computes the determinant of a 3x3 matrix A.
-* `invert_3x3(float **A, float **a_inv)` — inverts a 3x3 matrix A into a\_inv.
-* `vec_substract(float *a, float *b, float *c, int dim)` — subtracts vector b from vector a and stores the result in vector c.
-* `mat_algebrique(float **A, float **B, float **C, int rows, int cols, int op)` — adds or subtracts two matrices A and B depending on `op` (1 for addition, -1 for subtraction), stores result in C.
-* `copy_mat(float **A, float **B, int rows, int cols)` — copies matrix A into matrix B.
-* `make_mat(int rows, int cols)` — dynamically allocates memory for a matrix of size (rows x cols).
-* `free_mat(float **A, int rows)` — frees dynamically allocated memory for a matrix A.
-* `norme_mat(float **A, int rows, int cols)` — computes the squared Frobenius norm of matrix A.
+- ```void mat_mult(float **A, int A_rows, int A_cols, float **B, int B_cols, float **C)```  
+  MULTIPLICATION DE DEUX MATRICES
+
+- ```void mat_transpose(float **A, int rows, int cols, float **A_T)```  
+  TRANSPOSEE D'UNE MATRICE A rows LIGNES ET cols COLONNES
+
+- ```float determinant3x3(float **A)```  
+  DÉTERMINANT D'UNE MATRICE 3×3
+
+- ```int invert_3x3(float **A, float **a_inv)```  
+  INVERSION D'UNE MATRICE 3×3
+
+- ```void vec_substract(float *a, float *b, float *c, int dim)```  
+  SOUSTRACTION DE DEUX VECTEURS DE DIMENSION dim
+
+- ```void mat_algebrique(float **A, float **B, float **C, int rows, int cols, int op)```  
+  Sert à soustraire ou additionner deux matrices : op = 1 pour ajout, op = -1 pour soustraction
+
+- ```void copy_mat(float **A, float **B, int rows, int cols)```  
+  COPIE D'UNE MATRICE
+
+- ```float **make_mat(int rows, int cols)```  
+  ALLOCATION DYNAMIQUE D'UNE MATRICE
+
+- ```void free_mat(float **A, int rows)```  
+  LIBÉRATION DE L'ALLOCATION DYNAMIQUE D'UNE MATRICE
+
+- ```float norme_mat(float **A, int rows, int cols)```  
+  IMPLÉMENTATION D'UNE NORME DE FROBENIUS AU CARRÉ POUR LES MATRICES
 
 ---
 

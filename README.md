@@ -1,67 +1,78 @@
+
+---
+
 # Projet de Quadrocopter, par Thibault et Matéo
 
+---
 
+## Premières fonctions
 
+In the file `helpers.c` you will first write three functions that you will need for the rest of the project:
 
-##  Premières fonctions
-In the file helpers.c you will first write three fucntions that you will need for the rest of the project:
-- ```mat_mult(const float *A, int A_rows, int A_cols, const float *B, int B_cols, float *C)``` where A and B are the matrices to multiply and C is the multiplication resulting matrix.
-- ```mat_transpose(const float *A, int rows, int cols, float *A_T)``` transposing matrix A.
-- ```invert_3x3(const float A[3][3], float a_inv[3][3])``` invertin matrix A.
-- ```vec_substract(const float *a, const float *b, float *c, int dim)```, does $a - b = c$ with $a,b,c \in \mathbb{R}^{dim}$.
+* `mat_mult(const float *A, int A_rows, int A_cols, const float *B, int B_cols, float *C)` — multiplies two matrices A and B, and stores the result in matrix C.
+* `mat_transpose(const float *A, int rows, int cols, float *A_T)` — transposes matrix A into A\_T.
+* `invert_3x3(const float A[3][3], float a_inv[3][3])` — inverts a 3x3 matrix A into a\_inv.
+* `vec_substract(const float *a, const float *b, float *c, int dim)` — computes vector subtraction $a - b = c$, with vectors of dimension `dim`.
+
 You can test your functions with basic algebra computations before starting the next section.
 
-En tout, 9 fonctions ont déjà été ajoutées afin d'aider à réaliser le code.
-Elles se trouvent dans le fichier helpers.c (code) et helpers.h (prototypes).
+---
 
-void mat_mult( float **A, int A_rows, int A_cols,  float **B, int B_cols, float **C);
-MULTIPLICATION DE DEUX MATRICES
+## Fonctions déjà implémentées dans `helpers.c` / `helpers.h`
 
-void mat_transpose( float **A, int rows, int cols, float **A )
-TRANSPOSEE D'UNE MATRICE A rows LIGNE ET cols COLONNES.
+* `mat_mult(float **A, int A_rows, int A_cols, float **B, int B_cols, float **C)` — multiplies matrices A and B, stores the result in C.
+* `mat_transpose(float **A, int rows, int cols, float **A_T)` — transposes matrix A.
+* `determinant3x3(float **A)` — computes the determinant of a 3x3 matrix A.
+* `invert_3x3(float **A, float **a_inv)` — inverts a 3x3 matrix A into a\_inv.
+* `vec_substract(float *a, float *b, float *c, int dim)` — subtracts vector b from vector a and stores the result in vector c.
+* `mat_algebrique(float **A, float **B, float **C, int rows, int cols, int op)` — adds or subtracts two matrices A and B depending on `op` (1 for addition, -1 for subtraction), stores result in C.
+* `copy_mat(float **A, float **B, int rows, int cols)` — copies matrix A into matrix B.
+* `make_mat(int rows, int cols)` — dynamically allocates memory for a matrix of size (rows x cols).
+* `free_mat(float **A, int rows)` — frees dynamically allocated memory for a matrix A.
+* `norme_mat(float **A, int rows, int cols)` — computes the squared Frobenius norm of matrix A.
 
-float determinant3x3(float **A);
-DETERMINANT D'UNE MATRICE 3X3.
+---
 
-int invert_3x3( float **A, float **a_inv); 
-INVERSION D'UNE MATRICE 3X3.
+## Compute A and B matrices and get the Q and R matrices from the paper
 
-void vec_substract( float *a,  float *b, float *c, int dim);
-SOUSTRACTION DE DEUX VECTEURS DE DIMENSION dim.
+To obtain the A and B matrices, you will need physical parameters for the system of interest.
+Later, we will try to implement our controller in the PX4 Firmware and will simulate the **x500 quadcopter**.
 
-void mat_algebrique( float **A,  float **B, float **C, int rows, int cols, int op);
-Sert à soustraire ou additionner deux matrices : op = 1 pour ajout et op = -1 pour soustraire
+Physical parameters:
 
-void copy_mat( float **A, float **B, int rows, int cols);
-COPIE D'UNE MATRICE.
+* Mass:
+  `m = 2.0`
 
-float **make_mat(int rows, int cols);
-ALLOCATION DYNAMIQUE D'UNE MATRICE.
+* Inertia:
 
-void free_mat(float **A, int rows);
-FREE DE L'ALLOCATION DYNAMIQUE D'UNE MATRICE.
+  ```math
+  I = \begin{bmatrix}
+  0.02166666666666667 & 0.0 & 0.0 \\
+  0.0 & 0.02166666666666667 & 0.0 \\
+  0.0 & 0.0 & 0.04000000000000001
+  \end{bmatrix}
+  ```
 
-float norme_mat(float **A,int rows,int cols);
-IMPLEMENTATION D'UNE NORME DE FROBENIUS AU CARRE POUR LES MATRICES.
+---
 
-
-## Compute A and B matrices and get the Q and R matrices from the paper.
-
-To obtain the A and B matrices you will need physical parameters for the system of interest. Later we will try to imoplement out controller in the PX4 Frirmware and will simulate the x500 quadcopter drone. Its mass is $m=2.0$ and is inertia is given by:
-```math
-I = \begin{bmatrix}0.02166666666666667 & 0.0 & 0.0 \\
-0.0 & 0.02166666666666667 & 0.0 \\
-0.0 & 0.0 & 0.04000000000000001\end{bmatrix}
-```
 ## Solver
-Now that you have implemented you helper functions, you will have to define your system and implement the algorithm provided in the project's description sheet in section 3.2.
-You can implement your function in lqr_solver.c
 
-## Comment lancer le code 
-Pour lancer le projet, il faut :
-```cmake .```
-et ensuite
-```make```
-Enfin, le solveur se lancera grâce au code :
-```./lqr_solver```
+Now that you have implemented your helper functions, you will define your system and implement the **LQR algorithm** described in the project's documentation (section 3.2).
+You should implement your function in the file:
+
+* `lqr_solver.c`
+
+---
+
+## Comment lancer le code
+
+Pour compiler et lancer le projet, utilisez les commandes suivantes dans le terminal :
+
+```bash
+cmake .
+make
+./lqr_solver
+```
+
+---
 

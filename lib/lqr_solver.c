@@ -1,6 +1,6 @@
-#include "helpers.h"
-#include "params.h"
-#include "lqr_solver.h"
+#include "../includes/helpers.h"
+#include "../src/params.h"
+#include "../includes/lqr_solver.h"
 
 //Cette fonction applique l'algorithme défini dans l'énoncé, qui permet de calculer le gain K
 void compute_lqr_gains( float **A, 

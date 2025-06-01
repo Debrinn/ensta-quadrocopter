@@ -1,5 +1,5 @@
-#include "acceleration_controller.h"
-#include "helpers.h"
+#include "../includes/acceleration_controller.h"
+#include "../includes/helpers.h"
 
 //void transpose_q(q, q_et)
 

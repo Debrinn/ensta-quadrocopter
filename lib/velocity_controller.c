@@ -1,7 +1,7 @@
-#include "velocity_controller.h"
+#include "../includes/velocity_controller.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "helpers.h"
+#include "../includes/helpers.h"
 
 void acceleration_ref(float ** v_ref, float ** v, float ** a_ref, float ** K, int dim_vect, int autre_dim_mat){
     float ** sous = malloc(sizeof(float*) * dim_vect);

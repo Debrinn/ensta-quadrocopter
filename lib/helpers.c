@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "helpers.h"
+#include "../includes/helpers.h"
 #include <math.h>
 // Fonction qui multiplie deux matrices
 void mat_mult( float **A, int A_rows, int A_cols,  float **B, int B_cols, float **C) {

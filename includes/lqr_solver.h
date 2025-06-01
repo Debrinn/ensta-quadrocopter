@@ -1,4 +1,4 @@
-#include "params.h"
+#include "../src/params.h"
 
 void compute_lqr_gains( float **A, 
     float **B,

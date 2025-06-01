@@ -1,0 +1,1 @@
+void compute_t_ref(float ** K, float ** q, float ** q_ref, float ** t_ref);

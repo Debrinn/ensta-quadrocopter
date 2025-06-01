@@ -23,3 +23,13 @@ void quat_mult(float ** quat1, float ** quat2, float ** res);
 void inv_quat(float ** q, float ** q_inv);
 
 void print_matrix(float** A, int rows, int columns);
+
+void pdt_vect(float **A, float **B, float **C);
+
+void normalise_vecteur(float ** A);
+
+float signe(float x);
+
+float maxi(float a, float b);
+
+void rotation_matrice_vers_quat_chiaverini(float ** R, float ** q);

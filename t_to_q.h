@@ -1,0 +1,1 @@
+void q_ref_calcul(float ** a_ref, float psi_ref, float ** q_ref);

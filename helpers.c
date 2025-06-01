@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "helpers.h"
-
+#include <math.h>
 // Fonction qui multiplie deux matrices
 void mat_mult( float **A, int A_rows, int A_cols,  float **B, int B_cols, float **C) {
     for (int i = 0; i < A_rows; i++) {
@@ -193,4 +193,49 @@ void print_matrix(float** A, int rows, int columns) {
         }
         printf("\n");
     }
+}
+
+
+void pdt_vect(float **A, float **B, float **C){
+    C[0][0] = A[1][0] * B[2][0] - A[2][0] * B[1][0];
+    C[1][0] = A[2][0] * B[0][0] - A[0][0] * B[2][0];
+    C[2][0] = A[0][0] * B[1][0] - A[1][0] * B[0][0];
+}
+
+void normalise_vecteur(float ** A){
+    float n = norme_mat(A,3,1);
+    A[0][0] = (1. / n) * A[0][0];
+    A[1][0] = (1. / n) * A[1][0];
+    A[2][0] = (1. / n) * A[2][0];
+
+}
+
+
+// Signe de x, retourne +1.0 si x > 0, -1.0 si x < 0, 0 si x = 0
+float signe(float x) {
+    if (x > 0) return 1.0;
+    else if (x < 0) return -1.0;
+    else return 0.0;
+}
+
+// Convertit une matrice de rotation (3x3) en quaternion [q0, q1, q2, q3]
+// Méthode Chiaverini–Siciliano
+
+float maxi(float a, float b){
+    if(a>b){
+        return a;
+    }else{
+        return b;
+    }
+}
+
+void rotation_matrice_vers_quat_chiaverini(float ** R, float ** q) {
+    float r11 = R[0][0], r12 = R[0][1], r13 = R[0][2];
+    float r21 = R[1][0], r22 = R[1][1], r23 = R[1][2];
+    float r31 = R[2][0], r32 = R[2][1], r33 = R[2][2];
+
+    q[0][0] = 0.5 * sqrt(maxi(0.0, 1 + r11 + r22 + r33));
+    q[1][0] = 0.5 * sqrt(maxi(0.0, 1 + r11 - r22 - r33)) * signe(r32 - r23);
+    q[2][0] = 0.5 * sqrt(maxi(0.0, 1 - r11 + r22 - r33)) * signe(r13 - r31);
+    q[3][0] = 0.5 * sqrt(maxi(0.0, 1 - r11 - r22 + r33)) * signe(r21 - r12);
 }

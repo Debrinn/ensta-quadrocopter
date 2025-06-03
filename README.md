@@ -35,10 +35,12 @@ Le code est organisé en 3 parties.
 ## Les fonctions d'aides : `helpers.c`
 ## Velocity controller : `velocity_controller.c`
 Ce bloc fait le calcul suivant
+
 ![image](https://github.com/user-attachments/assets/87f7861d-4741-4a8b-9e26-a911b51bf594)
 
 ## Acceleration controller : `acceleration_controller.c`
 Ce bloc fait le calcul suivant
+
 ![image](https://github.com/user-attachments/assets/cbab0bad-54ff-46e9-bead-60d08abbd800)
 
 ## T to q_ref : `t_to_q.c`
@@ -47,11 +49,13 @@ L'obtention de qref, est plus compliquée. Il faut en fait construire une base o
 ## LQR solver : `lqr_solver.c`
 L'algorithme de LQR Solver renvoit une matrice nulle, car la théorie fournie ne fonctionne pas pour passer du modèle continu au modèle discret dans l'algorithme.
 Malgré tout voici le schéma de l'algorithme 
+
 ![image](https://github.com/user-attachments/assets/b2402841-3b23-40e7-addc-15159b98fcfd)
 
 
 ## Calcul tau ref : `calcul_t_ref.c`
 Ce bloc fait le calcul suivant, pour obtenir le couple que l'on donne finalement au robot.
+
 ![image](https://github.com/user-attachments/assets/69b1252c-4379-4d7b-87ed-0c5f84bd82bf)
 
 ---

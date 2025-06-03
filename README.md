@@ -5,7 +5,7 @@
 
 ---
 
-## Premières fonctions
+## (Partie non supprimée du readme originel) // Premières fonctions
 
 In the file `helpers.c` you will first write three functions that you will need for the rest of the project:
 
@@ -60,7 +60,7 @@ Ce bloc fait le calcul suivant, pour obtenir le couple que l'on donne finalement
 
 ---
 
-## (Partie non supprimée du readme originel // Compute A and B matrices and get the Q and R matrices from the paper
+## (Partie non supprimée du readme originel) // Compute A and B matrices and get the Q and R matrices from the paper
 
 To obtain the A and B matrices, you will need physical parameters for the system of interest.
 Later, we will try to implement our controller in the PX4 Firmware and will simulate the **x500 quadcopter**.

@@ -24,44 +24,39 @@ Pour cela, on utilisera [la théorie de Monsieur Strivastava](https://arxiv.org/
 
 ![image](https://github.com/user-attachments/assets/92f45e45-f0f4-48ef-8362-cffcae34c76c)
 
+---
+## Organisation du code
+
+Le code est organisé en 3 parties.
+* `src` : on y trouve controller.c ainsi que le fichier params.h contenant des paramètres obligatoires pour la suite
+*  `lib` : on y trouve un fichier `helpers.c` contenant les fonctions génériques utilisées dans notre implémentation des matrices, vecteurs, et quaternions
+*  `includes` : on y trouve les .h correspondants aux fichiers de `lib`
+
+## Les fonctions d'aides : `helpers.c`
+## Velocity controller : `velocity_controller.c`
+Ce bloc fait le calcul suivant
+![image](https://github.com/user-attachments/assets/87f7861d-4741-4a8b-9e26-a911b51bf594)
+
+## Acceleration controller : `acceleration_controller.c`
+Ce bloc fait le calcul suivant
+![image](https://github.com/user-attachments/assets/cbab0bad-54ff-46e9-bead-60d08abbd800)
+
+## T to q_ref : `t_to_q.c`
+Ce bloc doit obtenir q_ref, l'attitude voulue du contrôleur.
+L'obtention de qref, est plus compliquée. Il faut en fait construire une base orthonormée a partir de a_ref. 
+## LQR solver : `lqr_solver.c`
+L'algorithme de LQR Solver renvoit une matrice nulle, car la théorie fournie ne fonctionne pas pour passer du modèle continu au modèle discret dans l'algorithme.
+Malgré tout voici le schéma de l'algorithme 
+![image](https://github.com/user-attachments/assets/b2402841-3b23-40e7-addc-15159b98fcfd)
 
 
-
-## Fonctions déjà implémentées dans `helpers.c` / `helpers.h`
-
-- ```void mat_mult(float **A, int A_rows, int A_cols, float **B, int B_cols, float **C)```  
-  MULTIPLICATION DE DEUX MATRICES
-
-- ```void mat_transpose(float **A, int rows, int cols, float **A_T)```  
-  TRANSPOSEE D'UNE MATRICE A rows LIGNES ET cols COLONNES
-
-- ```float determinant3x3(float **A)```  
-  DÉTERMINANT D'UNE MATRICE 3×3
-
-- ```int invert_3x3(float **A, float **a_inv)```  
-  INVERSION D'UNE MATRICE 3×3
-
-- ```void vec_substract(float *a, float *b, float *c, int dim)```  
-  SOUSTRACTION DE DEUX VECTEURS DE DIMENSION dim
-
-- ```void mat_algebrique(float **A, float **B, float **C, int rows, int cols, int op)```  
-  Sert à soustraire ou additionner deux matrices : op = 1 pour ajout, op = -1 pour soustraction
-
-- ```void copy_mat(float **A, float **B, int rows, int cols)```  
-  COPIE D'UNE MATRICE
-
-- ```float **make_mat(int rows, int cols)```  
-  ALLOCATION DYNAMIQUE D'UNE MATRICE
-
-- ```void free_mat(float **A, int rows)```  
-  LIBÉRATION DE L'ALLOCATION DYNAMIQUE D'UNE MATRICE
-
-- ```float norme_mat(float **A, int rows, int cols)```  
-  IMPLÉMENTATION D'UNE NORME DE FROBENIUS AU CARRÉ POUR LES MATRICES
+## Calcul tau ref : `calcul_t_ref.c`
+Ce bloc fait le calcul suivant, pour obtenir le couple que l'on donne finalement au robot.
+![image](https://github.com/user-attachments/assets/69b1252c-4379-4d7b-87ed-0c5f84bd82bf)
 
 ---
 
-## Compute A and B matrices and get the Q and R matrices from the paper
+## (Partie non supprimée du readme originel // Compute A and B matrices and get the Q and R matrices from the paper
 
 To obtain the A and B matrices, you will need physical parameters for the system of interest.
 Later, we will try to implement our controller in the PX4 Firmware and will simulate the **x500 quadcopter**.
@@ -90,17 +85,21 @@ You should implement your function in the file:
 
 * `lqr_solver.c`
 
----
-
-## Comment lancer le code
-
-Pour compiler et lancer le projet, utilisez les commandes suivantes dans le terminal :
 
 ```bash
 cmake .
 make
 ./lqr_solver
 ```
+
+---
+
+## Comment lancer le code
+
+Chaque bloc ne contient qu'une fonction, permettant de renvoyer la valeur voulue. Ainsi, pour obtenir si l'on souhaite donc tau ref ainsi que Tref, il suffit d'inclure dans un autre fichier les blocs.h des blocs correspondants.
+
+
+
 
 ---
 

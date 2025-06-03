@@ -17,6 +17,15 @@ In the file `helpers.c` you will first write three functions that you will need 
 You can test your functions with basic algebra computations before starting the next section.
 
 ---
+## Schéma bloc du projet 
+
+L'objectif du projet est de fournir un système de contrôle pour un quadrocoptere UAV.
+Pour cela, on utilisera [la théorie de Monsieur Strivastava](https://arxiv.org/pdf/2404.12261)
+
+![image](https://github.com/user-attachments/assets/92f45e45-f0f4-48ef-8362-cffcae34c76c)
+
+
+
 
 ## Fonctions déjà implémentées dans `helpers.c` / `helpers.h`
 
